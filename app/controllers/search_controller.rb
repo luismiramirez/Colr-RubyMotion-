@@ -26,6 +26,7 @@ class SearchController < UIViewController
     @search.when(UIControlEventTouchUpInside) do
       @search.enabled = false
       @text_field.enabled = false
+      @search.sizeToFit
 
       hex = @text_field.text
       hex = hex[1..-1] if hex[0] == "#"
@@ -45,6 +46,7 @@ class SearchController < UIViewController
   end
 
   def open_color(color)
-    p "Opening #{color.inspect}"
+    controller = ColorController.alloc.initWithColor(color)
+    self.navigationController.pushViewController(controller, animated: true)
   end
 end
